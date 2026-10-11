@@ -28,20 +28,23 @@ try:
     temp = workspace.name
     # Trust only these two reviewed casks in a disposable Homebrew config.
     env["XDG_CONFIG_HOME"] = str(Path(temp) / "config")
-    run(["brew", "trust", "--cask", "seanebones-lang/tap/" + args.cask,
-         "seanebones-lang/tap/" + other], env=env)
+    scoped_trust = subprocess.run(["brew", "help", "trust"], env=env,
+                                  capture_output=True, timeout=30).returncode == 0
+    if scoped_trust:
+        run(["brew", "trust", "--cask", "seanebones-lang/tap/" + args.cask,
+             "seanebones-lang/tap/" + other], env=env)
     result = subprocess.run(["brew", "install", "--cask", "seanebones-lang/tap/" + args.cask],
                             env=env, text=True, timeout=180)
     owned = args.cask in run(["brew", "list", "--cask"], env=env).stdout.splitlines()
     require(result.returncode == 0, "cask install failed")
     first = check(args.cask, env)
     marker = Path(temp) / "application-state/retain.txt"
-    marker.parent.mkdir()
+    marker.parent.mkdir(mode=0o700)
     marker.write_text("application-owned state survives package lifecycle\n")
     state_env = {**env, "DEADBOLT_DB": str(marker.parent / "state.db"),
                  "DEADBOLT_EVENTS": str(marker.parent / "events.jsonl")}
-    run([binary_link, "ensure", "--agent", "lifecycle-test"], env=state_env)
-    run([binary_link, "kill", "--agent", "lifecycle-test"], env=state_env)
+    # Status initializes the real private store without inventing an HTTP-only CLI operation.
+    run([binary_link, "status"], env=state_env)
     db = Path(state_env["DEADBOLT_DB"])
     snapshot = db.read_bytes()
     rejected = subprocess.run(["brew", "install", "--cask", "seanebones-lang/tap/" + other],
@@ -65,7 +68,8 @@ try:
     report = {"passed": True, "initial_install": first, "reinstall": second,
               "conflicting_channel": "explicitly refused without changing installed casks",
               "application_state": "database and marker unchanged after reinstall and uninstall",
-              "cleanup": "owned cask removed; unrelated casks unchanged; temporary trust removed",
+              "cleanup": "owned cask removed; unrelated casks unchanged; temporary config removed",
+              "scoped_trust_supported": scoped_trust,
               "limits": "Reinstall tested; no upgrade between distinct stable versions claimed."}
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2) + "\n")
