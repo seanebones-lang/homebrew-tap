@@ -1,0 +1,56 @@
+{
+  "n11-deadbolt": {
+    "version": "1.0.3",
+    "prerelease": false,
+    "engine_source_tag": "v1.0.3",
+    "macos": {
+      "arm64": {
+        "archive": "deadbolt-1.0.3-aarch64-apple-darwin.zip",
+        "archive_sha256": "d8af0582d347e56ae4d618f6ac2e4380d52b4b01ffc57a9e385e5cc33cc36a41",
+        "binary_sha256": "8204438de4e10788efb1c8497ee59b52da305db19fc15b1bffb9752642251620",
+        "apple_notarization": {
+          "status": "Accepted",
+          "submission": "70ff347c-1a5f-4a6a-ae79-bbbe2e2f64d5",
+          "archive_sha256": "d8af0582d347e56ae4d618f6ac2e4380d52b4b01ffc57a9e385e5cc33cc36a41"
+        }
+      },
+      "x86_64": {
+        "archive": "deadbolt-1.0.3-x86_64-apple-darwin.zip",
+        "archive_sha256": "3534804199a637e75f53179399f9130e86c53206dcc7cbfe2253fc6eae224f04",
+        "binary_sha256": "3ac3920f54f03227c9873ea79c1feaebb8d8a14e1da7448edb025d226ac4dc8f",
+        "apple_notarization": {
+          "status": "Accepted",
+          "submission": "8e4f02bf-09b0-4726-a1b1-47c9e45842fa",
+          "archive_sha256": "3534804199a637e75f53179399f9130e86c53206dcc7cbfe2253fc6eae224f04"
+        }
+      }
+    }
+  },
+  "n11-deadbolt-preview": {
+    "version": "1.1.0-rc.1",
+    "prerelease": true,
+    "engine_source_tag": "v1.1.0-rc.1",
+    "macos": {
+      "arm64": {
+        "archive": "deadbolt-1.1.0-rc.1-aarch64-apple-darwin.zip",
+        "archive_sha256": "9dabeee245ee967bc3e5dca0db54c9c262472e47aa2d487bfff2634cac98afcb",
+        "binary_sha256": "2daf1d6255405f6c1fe04a718d8de3320b60c206f6de2bb3fb2c17edd2d3bfba",
+        "apple_notarization": {
+          "status": "Accepted",
+          "submission": "731c940c-4f0b-4799-8225-d9c29859d458",
+          "archive_sha256": "9dabeee245ee967bc3e5dca0db54c9c262472e47aa2d487bfff2634cac98afcb"
+        }
+      },
+      "x86_64": {
+        "archive": "deadbolt-1.1.0-rc.1-x86_64-apple-darwin.zip",
+        "archive_sha256": "72b7c9e0ad49f4f20ae21250553b3346c6a3cfaa93b37113ff5e871faa3830aa",
+        "binary_sha256": "2e925c95e800ae7c8e86122d569562ac244de943fdd3aabf3884d13a0f166db6",
+        "apple_notarization": {
+          "status": "Accepted",
+          "submission": "7502ad5b-c77b-4a92-adc8-100eee80dac1",
+          "archive_sha256": "72b7c9e0ad49f4f20ae21250553b3346c6a3cfaa93b37113ff5e871faa3830aa"
+        }
+      }
+    }
+  }
+}

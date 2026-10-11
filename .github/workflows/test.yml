@@ -1,0 +1,52 @@
+name: Homebrew installation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  installation:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-15-intel]
+        cask: [n11-deadbolt, n11-deadbolt-preview]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+      HOMEBREW_NO_INSTALL_CLEANUP: "1"
+      HOMEBREW_DEVELOPER: "1"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - name: Tap the exact checked-out revision and trust only reviewed casks
+        env:
+          XDG_CONFIG_HOME: ${{ runner.temp }}/deadbolt-homebrew-config
+        run: |
+          brew tap seanebones-lang/tap "$GITHUB_WORKSPACE"
+          test "$(git -C "$(brew --repository seanebones-lang/tap)" rev-parse HEAD)" = "$(git rev-parse HEAD)"
+          brew trust --cask seanebones-lang/tap/n11-deadbolt seanebones-lang/tap/n11-deadbolt-preview
+      - name: Check cask style and online metadata
+        env:
+          XDG_CONFIG_HOME: ${{ runner.temp }}/deadbolt-homebrew-config
+        run: |
+          brew style Casks/n11-deadbolt.rb Casks/n11-deadbolt-preview.rb
+          brew audit --cask --strict --online "seanebones-lang/tap/${{ matrix.cask }}"
+      - name: Verify actual installed effects, channel conflicts and state-preserving removal
+        run: python tests/lifecycle.py "${{ matrix.cask }}" --report "reports/${{ matrix.os }}-${{ matrix.cask }}.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: acceptance-${{ matrix.os }}-${{ matrix.cask }}
+          path: reports/*.json
+          if-no-files-found: error
+          retention-days: 30
