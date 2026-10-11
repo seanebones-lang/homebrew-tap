@@ -41,6 +41,7 @@ jobs:
       - name: Check cask style and online metadata
         env:
           XDG_CONFIG_HOME: ${{ runner.temp }}/deadbolt-homebrew-config
+          HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
         run: |
           brew style Casks/n11-deadbolt.rb Casks/n11-deadbolt-preview.rb
           brew audit --cask --strict --online "seanebones-lang/tap/${{ matrix.cask }}"
