@@ -109,12 +109,18 @@ uninstalls, and checks that a disposable application database remains unchanged.
 Reinstall is tested; this is not a claim of an upgrade between distinct stable
 versions or of independent customer adoption.
 
+The preview is intentionally a GitHub prerelease.
+[`audit_exceptions/github_prerelease_allowlist.json`](audit_exceptions/github_prerelease_allowlist.json)
+declares only `n11-deadbolt-preview` version `1.1.0-rc.1`; stable is not exempt.
+All other strict online audits and installation checks remain enabled.
+
 For a new engine release:
 
 1. Verify its exact release/tag identity, ZIP hashes, signatures and matching
    Apple notarization logs for both architectures. Do not follow an MCP bundle's
    version or change archive contents under an existing version.
-2. Update the selected cask and `releases.json`. Preserve the stable/preview
+2. Update the selected cask and `releases.json`. For a preview, update its exact
+   prerelease declaration as well. Preserve the stable/preview
    distinction and mutual conflict. Review the published version's state and
    policy compatibility before suggesting a rollback.
 3. Open a pull request. Run `brew style`, strict online cask audit and the
