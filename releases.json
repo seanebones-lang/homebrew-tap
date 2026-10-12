@@ -27,31 +27,31 @@
     }
   },
   "n11-deadbolt-preview": {
-    "version": "2.0.0-rc.1",
+    "version": "2.0.0-rc.2",
     "prerelease": true,
-    "engine_source_tag": "v2.0.0-rc.1",
+    "engine_source_tag": "v2.0.0-rc.2",
     "macos": {
       "arm64": {
-        "archive": "deadbolt-2.0.0-rc.1-aarch64-apple-darwin.zip",
-        "archive_sha256": "2a55ad536473ef9900510a516fb9407fd96e43429d8ba2b51cc378da4c6cd88b",
-        "binary_sha256": "47f4effd95345ca76af827d9a957108261129236e2bb61225b4ec7fb3324284a",
+        "archive": "deadbolt-2.0.0-rc.2-aarch64-apple-darwin.zip",
+        "archive_sha256": "26c33da31ba36b0753bfdc89e43913d1bd62c1ee102a59009b29a7b09967d689",
+        "binary_sha256": "d0fb13d2fb8f85de2817b3cac11127241b230059ec9e381413ebf7a1005b3ea0",
         "apple_notarization": {
           "status": "Accepted",
-          "submission": "5aae083d-e2ab-4a5c-9e33-64a693b31bad",
-          "archive_sha256": "2a55ad536473ef9900510a516fb9407fd96e43429d8ba2b51cc378da4c6cd88b"
+          "submission": "7114d73f-9b78-4c29-b8c6-32278b353627",
+          "archive_sha256": "26c33da31ba36b0753bfdc89e43913d1bd62c1ee102a59009b29a7b09967d689"
         }
       },
       "x86_64": {
-        "archive": "deadbolt-2.0.0-rc.1-x86_64-apple-darwin.zip",
-        "archive_sha256": "44d96961ddea1baf90a1888aa2693b3a201091e08a863ee35ca07ced9864409d",
-        "binary_sha256": "09f55ebb10de595de56a57b7747ee3fed25b462632292cc7a6962706111bf9ca",
+        "archive": "deadbolt-2.0.0-rc.2-x86_64-apple-darwin.zip",
+        "archive_sha256": "abdf66e8a12ad120f88686a24fd76828e430dc9a39728ba078a89b8afe0abf3e",
+        "binary_sha256": "99fd75f8670b9f987d609b91bb3d0cc40d2488f7014f68ce1c940f8653fb233b",
         "apple_notarization": {
           "status": "Accepted",
-          "submission": "b903a9a9-7603-45ff-81d4-2d3afdf90cc7",
-          "archive_sha256": "44d96961ddea1baf90a1888aa2693b3a201091e08a863ee35ca07ced9864409d"
+          "submission": "57b8e0ce-0f9f-4987-af24-7864f36b72a0",
+          "archive_sha256": "abdf66e8a12ad120f88686a24fd76828e430dc9a39728ba078a89b8afe0abf3e"
         }
       }
     },
-    "source_commit": "d14f81f974c556446e520d896acf7761f73861e6"
+    "source_commit": "d166c7b039800bbd6d8acb1bc5c66f9add472f5f"
   }
 }
