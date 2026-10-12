@@ -15,7 +15,7 @@ deadbolt --version
 deadbolt drill
 ```
 
-This installs engine **1.0.3**, selecting the existing signed Apple Silicon or
+This cask source selects engine **2.0.0**, selecting the existing signed Apple Silicon or
 Intel archive by architecture. No Rust compiler, model key or GitHub account is
 needed. Homebrew verifies the pinned archive checksum. These command-line
 executables use Apple's accepted online notarization tickets, not app-bundle
@@ -35,30 +35,23 @@ version's prompt. Whole-tap trust is unnecessary. This package does not start a
 service, configure policy or make every agent tool protected. Set explicit
 policy and route each protected effect through your trusted dispatcher.
 
-## Opt into the prerelease
+## Version 2 migration and older preview
 
-```sh
-brew install --cask seanebones-lang/tap/n11-deadbolt-preview
-```
+Stable 2.0.0 includes fixed deadlines, supervisor-renewed leases, ancestor
+policy ceilings, scoped admission credentials and exact-action APIs. Read the
+[version 2 migration guide](https://github.com/seanebones-lang/deadbolt/blob/v2.0.0/docs/MIGRATING-V2.md)
+before replacing a 1.x integration. New roots default to supervisor renewal and
+a 60-second idle TTL; a separate trusted supervisor must maintain liveness.
+Declared destinations remain policy inputs, with OS egress controls a separate
+boundary.
 
-The preview installs engine **2.0.0-rc.2** with exact-action approvals, scoped
-admission credentials, fixed hard deadlines, optional supervisor-only renewal,
-and operator-owned offline exceptions. It is explicitly a prerelease.
-Review the [2.0 migration guide](https://github.com/seanebones-lang/deadbolt/blob/v2.0.0-rc.2/docs/MIGRATING-V2.md)
-before updating a 1.x integration: Rust struct construction and destination-policy
-semantics have changed. Declared destinations are policy inputs; OS egress
-controls remain a separate boundary.
-The stable and preview casks conflict because both provide `deadbolt`.
-For the optional Python integration, use Python 3.10+ and:
-
-```sh
-python -m pip install 'n11-deadbolt-client[openai-agents]==2.0.0rc1'
-```
-
-The Python package and engine have separate installation and version spelling.
-The optional owned POSIX process supervisor needs Python 3.13+ with `waitid`;
-it does not provide whole-agent sandboxing or remote process cancellation.
-MCP bundle 1.1.0 contains stable engine 1.0.3, not this preview engine.
+The older `n11-deadbolt-preview` cask stays pinned to 2.0.0-rc.2 for deliberate
+historical evaluation. It lacks the later destination and damaged-store fixes.
+Use the stable cask for new installations. The two casks conflict because they
+provide the same command. The Python client and MCP/editor bundles are separate
+packages; verify their exact version through the [installation guide](https://github.com/seanebones-lang/deadbolt/blob/main/docs/INSTALL.md).
+The optional owned-process cancellation reference needs Python 3.13+ with
+`waitid`; it does not provide whole-agent sandboxing.
 
 ## Verify real effects
 
@@ -66,7 +59,7 @@ The installed archive retains its examples and documentation. Run its eleven-cas
 disposable evaluation with Python 3.9+:
 
 ```sh
-DEADBOLT_RELEASE="$(brew --caskroom)/n11-deadbolt/1.0.3/deadbolt-1.0.3-$(uname -m | sed 's/arm64/aarch64/')-apple-darwin"
+DEADBOLT_RELEASE="$(brew --caskroom)/n11-deadbolt/2.0.0/deadbolt-2.0.0-$(uname -m | sed 's/arm64/aarch64/')-apple-darwin"
 python3 "$DEADBOLT_RELEASE/examples/evaluate.py" --binary "$DEADBOLT_RELEASE/deadbolt"
 ```
 
@@ -86,15 +79,15 @@ brew update
 brew upgrade --cask seanebones-lang/tap/n11-deadbolt
 ```
 
-Preview updates use its separate cask name. A reviewed release updates the
+The historical preview uses its separate cask name. A reviewed release updates the
 cask version and checksums; installing this tap does not automatically upgrade
 the engine or start it on login.
 
 To switch channels, uninstall the current cask before installing the other:
 
 ```sh
-brew uninstall --cask n11-deadbolt
-brew install --cask seanebones-lang/tap/n11-deadbolt-preview
+brew uninstall --cask n11-deadbolt-preview
+brew install --cask seanebones-lang/tap/n11-deadbolt
 ```
 
 To remove it, use `brew uninstall --cask n11-deadbolt` or the preview name.
