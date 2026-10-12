@@ -41,16 +41,23 @@ policy and route each protected effect through your trusted dispatcher.
 brew install --cask seanebones-lang/tap/n11-deadbolt-preview
 ```
 
-The preview installs engine **1.1.0-rc.1** with exact-action approvals, scoped
-admission credentials and dispatch helpers. It is explicitly a prerelease.
+The preview installs engine **2.0.0-rc.1** with exact-action approvals, scoped
+admission credentials, fixed hard deadlines, optional supervisor-only renewal,
+and operator-owned offline exceptions. It is explicitly a prerelease.
+Review the [2.0 migration guide](https://github.com/seanebones-lang/deadbolt/blob/v2.0.0-rc.1/docs/MIGRATING-V2.md)
+before updating a 1.x integration: Rust struct construction and destination-policy
+semantics have changed. Declared destinations are policy inputs; OS egress
+controls remain a separate boundary.
 The stable and preview casks conflict because both provide `deadbolt`.
 For the optional Python integration, use Python 3.10+ and:
 
 ```sh
-python -m pip install 'n11-deadbolt-client[openai-agents]==1.1.0rc1'
+python -m pip install 'n11-deadbolt-client[openai-agents]==2.0.0rc1'
 ```
 
 The Python package and engine have separate installation and version spelling.
+The optional owned POSIX process supervisor needs Python 3.13+ with `waitid`;
+it does not provide whole-agent sandboxing or remote process cancellation.
 MCP bundle 1.1.0 contains stable engine 1.0.3, not this preview engine.
 
 ## Verify real effects
@@ -63,7 +70,7 @@ DEADBOLT_RELEASE="$(brew --caskroom)/n11-deadbolt/1.0.3/deadbolt-1.0.3-$(uname -
 python3 "$DEADBOLT_RELEASE/examples/evaluate.py" --binary "$DEADBOLT_RELEASE/deadbolt"
 ```
 
-For the preview, use `n11-deadbolt-preview`, `1.1.0-rc.1` and the corresponding
+For the preview, use `n11-deadbolt-preview`, `2.0.0-rc.1` and the corresponding
 archive directory. The evaluation uses disposable state and checks actual file
 contents or absence for allow, policy denial, one-shot approval, revocation,
 child revocation, outage and restart. It does not use a model or prove whole-agent
@@ -111,7 +118,7 @@ versions or of independent customer adoption.
 
 The preview is intentionally a GitHub prerelease.
 [`audit_exceptions/github_prerelease_allowlist.json`](audit_exceptions/github_prerelease_allowlist.json)
-declares only `n11-deadbolt-preview` version `1.1.0-rc.1`; stable is not exempt.
+declares only `n11-deadbolt-preview` version `2.0.0-rc.1`; stable is not exempt.
 All other strict online audits and installation checks remain enabled.
 
 For a new engine release:
