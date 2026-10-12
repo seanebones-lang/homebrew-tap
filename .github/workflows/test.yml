@@ -35,10 +35,13 @@ jobs:
         run: |
           brew tap seanebones-lang/tap "$GITHUB_WORKSPACE"
           test "$(git -C "$(brew --repository seanebones-lang/tap)" rev-parse HEAD)" = "$(git rev-parse HEAD)"
-          brew trust --cask seanebones-lang/tap/n11-deadbolt seanebones-lang/tap/n11-deadbolt-preview
+          if brew help trust >/dev/null 2>&1; then
+            brew trust --cask seanebones-lang/tap/n11-deadbolt seanebones-lang/tap/n11-deadbolt-preview
+          fi
       - name: Check cask style and online metadata
         env:
           XDG_CONFIG_HOME: ${{ runner.temp }}/deadbolt-homebrew-config
+          HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
         run: |
           brew style Casks/n11-deadbolt.rb Casks/n11-deadbolt-preview.rb
           brew audit --cask --strict --online "seanebones-lang/tap/${{ matrix.cask }}"
