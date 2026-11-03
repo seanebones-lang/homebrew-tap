@@ -1,31 +1,31 @@
 {
   "n11-deadbolt": {
-    "version": "2.0.0",
+    "version": "2.0.1",
     "prerelease": false,
-    "engine_source_tag": "v2.0.0",
+    "engine_source_tag": "v2.0.1",
     "macos": {
       "arm64": {
-        "archive": "deadbolt-2.0.0-aarch64-apple-darwin.zip",
-        "archive_sha256": "e33aa9b4167f3af1f187045741c7496f5aef6f85131e52f84327559a2d20ae9f",
-        "binary_sha256": "741f7f60966b56c7ce1f3d2268778c6bdb69f0ece23c6992980dc3708d134fd1",
+        "archive": "deadbolt-2.0.1-aarch64-apple-darwin.zip",
+        "archive_sha256": "e4f204744f65a45a944761bb9597d7d17a637d714c1c56eec8ed69d5347839df",
+        "binary_sha256": "a1c2942f5b5c2fad57dba6534633f52602dc2fbaae5f327a7456f1348143a688",
         "apple_notarization": {
           "status": "Accepted",
-          "submission": "215832fa-d39c-4ea5-9806-a00c9e7c6c31",
-          "archive_sha256": "e33aa9b4167f3af1f187045741c7496f5aef6f85131e52f84327559a2d20ae9f"
+          "submission": "48cb0018-7f34-4219-9f28-5483be841574",
+          "archive_sha256": "e4f204744f65a45a944761bb9597d7d17a637d714c1c56eec8ed69d5347839df"
         }
       },
       "x86_64": {
-        "archive": "deadbolt-2.0.0-x86_64-apple-darwin.zip",
-        "archive_sha256": "3b206602f234b0a9444fabe22adf00bcb6ee32af4e0cec5df9d8b70ff12cf685",
-        "binary_sha256": "8896bf0200058b653af53b66231c9843e4aa9557a056aa194c3b2b5e76c3cc41",
+        "archive": "deadbolt-2.0.1-x86_64-apple-darwin.zip",
+        "archive_sha256": "0075e54fe2dbc5f3081be751b793f6ad30e2238bbba59f42cfdb358e4b4bec06",
+        "binary_sha256": "01e42b3c38e7c1c6a11aa6f2f22c5e19a6af2c634cb9ae7c67cdaebee7e4990c",
         "apple_notarization": {
           "status": "Accepted",
-          "submission": "52dd43d8-4ae6-428c-8130-06d358365714",
-          "archive_sha256": "3b206602f234b0a9444fabe22adf00bcb6ee32af4e0cec5df9d8b70ff12cf685"
+          "submission": "35ab2d71-fec7-402e-bc99-4ca3106eb227",
+          "archive_sha256": "0075e54fe2dbc5f3081be751b793f6ad30e2238bbba59f42cfdb358e4b4bec06"
         }
       }
     },
-    "source_commit": "14804f2d512ce814a11de80daa8ca858b1dc7598"
+    "source_commit": "e87519f700be03c27a564ed274907649224d256f"
   },
   "n11-deadbolt-preview": {
     "version": "2.0.0-rc.2",

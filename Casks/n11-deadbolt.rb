@@ -1,9 +1,9 @@
 cask "n11-deadbolt" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "2.0.0"
-  sha256 arm:   "e33aa9b4167f3af1f187045741c7496f5aef6f85131e52f84327559a2d20ae9f",
-         intel: "3b206602f234b0a9444fabe22adf00bcb6ee32af4e0cec5df9d8b70ff12cf685"
+  version "2.0.1"
+  sha256 arm:   "e4f204744f65a45a944761bb9597d7d17a637d714c1c56eec8ed69d5347839df",
+         intel: "0075e54fe2dbc5f3081be751b793f6ad30e2238bbba59f42cfdb358e4b4bec06"
 
   url "https://github.com/seanebones-lang/deadbolt/releases/download/v#{version}/deadbolt-#{version}-#{arch}-apple-darwin.zip"
   name "DeadBolt"
@@ -20,7 +20,7 @@ cask "n11-deadbolt" do
   binary "deadbolt-#{version}-#{arch}-apple-darwin/deadbolt"
 
   caveats <<~EOS
-    This installs the stable 2.0.0 engine.
+    This installs the stable 2.0.1 engine.
     Installation does not start a service or configure protection.
     Set an explicit policy before routing protected effects through DeadBolt.
     Keep operator credentials outside agent-controlled code.
