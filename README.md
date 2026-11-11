@@ -15,7 +15,7 @@ deadbolt --version
 deadbolt drill
 ```
 
-This cask source selects engine **2.0.1**, selecting the existing signed Apple Silicon or
+This cask source selects engine **2.0.2**, selecting the existing signed Apple Silicon or
 Intel archive by architecture. No Rust compiler, model key or GitHub account is
 needed. Homebrew verifies the pinned archive checksum. These command-line
 executables use Apple's accepted online notarization tickets, not app-bundle
@@ -37,16 +37,16 @@ policy and route each protected effect through your trusted dispatcher.
 
 ## Version 2 migration and older preview
 
-Stable 2.0.1 fixes denied-call MCP spend accounting and requires fresh admission for every MCP tool invocation. It includes fixed deadlines, supervisor-renewed leases, ancestor
+Stable 2.0.2 fixes bundled SQLite for RUSTSEC-2026-0459 / CVE-2026-119375. It retains the earlier correction to denied-call MCP spend accounting and requires fresh admission for every MCP tool invocation. It includes fixed deadlines, supervisor-renewed leases, ancestor
 policy ceilings, scoped admission credentials and exact-action APIs. Read the
-[version 2 migration guide](https://github.com/seanebones-lang/deadbolt/blob/v2.0.1/docs/MIGRATING-V2.md)
+[version 2 migration guide](https://github.com/seanebones-lang/deadbolt/blob/v2.0.2/docs/MIGRATING-V2.md)
 before replacing a 1.x integration. New roots default to supervisor renewal and
 a 60-second idle TTL; a separate trusted supervisor must maintain liveness.
 Declared destinations remain policy inputs, with OS egress controls a separate
 boundary.
 
 The older `n11-deadbolt-preview` cask stays pinned to 2.0.0-rc.2 for deliberate
-historical evaluation. It lacks the later destination and damaged-store fixes.
+historical evaluation. It lacks the later SQLite security update, destination and damaged-store fixes.
 Use the stable cask for new installations. The two casks conflict because they
 provide the same command. The Python client and MCP/editor bundles are separate
 packages; verify their exact version through the [installation guide](https://github.com/seanebones-lang/deadbolt/blob/main/docs/INSTALL.md).
@@ -59,7 +59,7 @@ The installed archive retains its examples and documentation. Run its eleven-cas
 disposable evaluation with Python 3.9+:
 
 ```sh
-DEADBOLT_RELEASE="$(brew --caskroom)/n11-deadbolt/2.0.1/deadbolt-2.0.1-$(uname -m | sed 's/arm64/aarch64/')-apple-darwin"
+DEADBOLT_RELEASE="$(brew --caskroom)/n11-deadbolt/2.0.2/deadbolt-2.0.2-$(uname -m | sed 's/arm64/aarch64/')-apple-darwin"
 python3 "$DEADBOLT_RELEASE/examples/evaluate.py" --binary "$DEADBOLT_RELEASE/deadbolt"
 ```
 
